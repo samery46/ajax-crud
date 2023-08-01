@@ -7,6 +7,8 @@ use App\Models\Artikel;
 use Illuminate\View\View;
 //return type redirectResponse
 use Illuminate\Http\RedirectResponse;
+//import Facade "Storage"
+use Illuminate\Support\Facades\Storage;
 
 class ArtikelController extends Controller
 {
@@ -54,6 +56,56 @@ class ArtikelController extends Controller
 
         //render view with artikel
         return view('artikels.show', compact('artikel'));
+    }
+
+    public function edit(string $id): View
+    {
+        //get artikel by ID
+        $artikel = Artikel::findOrFail($id);
+
+        //render view with artikel
+        return view('artikels.edit', compact('artikel'));
+    }
+    public function update(Request $request, $id): RedirectResponse
+    {
+        //validate form
+        $this->validate($request, [
+            'image'     => 'image|mimes:jpeg,jpg,png|max:2048',
+            'title'     => 'required|min:5',
+            'content'   => 'required|min:10'
+        ]);
+
+        //get artikel by ID
+        $artikel = Artikel::findOrFail($id);
+
+        //check if image is uploaded
+        if ($request->hasFile('image')) {
+
+            //upload new image
+            $image = $request->file('image');
+            $image->storeAs('public/artikels', $image->hashName());
+
+            //delete old image
+            Storage::delete('public/artikels/'.$artikel->image);
+
+            //update artikel with new image
+            $artikel->update([
+                'image'     => $image->hashName(),
+                'title'     => $request->title,
+                'content'   => $request->content
+            ]);
+
+        } else {
+
+            //update artikel without image
+            $artikel->update([
+                'title'     => $request->title,
+                'content'   => $request->content
+            ]);
+        }
+
+        //redirect to index
+        return redirect()->route('artikels.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
 }
