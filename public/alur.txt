@@ -1,0 +1,62 @@
+Project Laravel CRUD Ajax
+
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:samery46/ajax-crud.git
+git push -u origin main
+
+1. Menampilkan Posts
+
+git branch Menampilkan_post
+git checkout Menampilkan_post
+
+php artisan make:model Post -m
+php artisan migrate
+php artisan make:controller PostController
+
+Membuat Route
+Membuat View
+
+git add .
+git commit -m "Menampilkan_post"
+git push origin Menampilkan_post
+
+2. Insert Data Dengan Ajax
+
+git checkout main
+git pull origin main
+git checkout -b Insert_data_dengan_ajax
+
+membuat Method Store
+membuat Model dan Proses Insert Ajax
+
+git add .
+git commit -m "Insert data dengan ajax"
+git push origin Insert_data_dengan_ajax
+
+
+3. Edit dan Update Data dengan Ajax
+
+git checkout main
+git pull origin main
+git checkout -b Edit_update_data_dengan_ajax
+
+Menambahkan method show dan update
+
+git add .
+git commit -m "Edit_update_data_dengan_ajax"
+git push origin Edit_update_data_dengan_ajax
+
+4. Delete Data Dengan Ajax
+
+git checkout main
+git pull origin main
+git checkout -b Delete_data_dengan_ajax
+
+Menambahkan method destroy
+
+git add .
+git commit -m "Delete_data_dengan_ajax"
+git push origin Delete_data_dengan_ajax
