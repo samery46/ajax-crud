@@ -60,3 +60,71 @@ Menambahkan method destroy
 git add .
 git commit -m "Delete_data_dengan_ajax"
 git push origin Delete_data_dengan_ajax
+
+
+5. Menampilkan data Artikel
+
+git checkout main
+git pull origin main
+git checkout -b Menampilkan_data_artikel
+
+php artisan storage:link
+php artisan make:model Artikel -m
+php artisan migrate
+php artisan make:controller ArtikelController
+
+
+git add .
+git commit -m "Menampilkan_data_artikel"
+git push origin Menampilkan_data_artikel
+
+6. Insert data dalam database
+
+git checkout main
+git pull origin main
+git checkout -b Insert_data_artikel
+
+menambahkan model create dan store
+membuat view create
+
+git add .
+git commit -m "Insert data artikel"
+git push origin Insert_data_artikel
+
+7. Menampilkan detail data by ID
+
+git checkout main
+git pull origin main
+git checkout -b Show_detail_artikel
+
+menambahkan model show
+membuat view show
+
+git add .
+git commit -m "Show data artikel"
+git push origin Show_detail_artikel
+
+8. Edit dan Update data Artikel
+
+git checkout main
+git pull origin main
+git checkout -b edit_update_artikel
+
+menambahkan model edit dan update
+membuat view Edit
+
+git add .
+git commit -m "edit update artikel"
+git push origin edit_update_artikel
+
+9. Delete data Artikel
+
+git checkout main
+git pull origin main
+git checkout -b Delete_data_artikel
+
+menambahkan model delete artikel
+
+git add .
+git commit -m "Delete data artikel"
+git push origin Delete_data_artikel
