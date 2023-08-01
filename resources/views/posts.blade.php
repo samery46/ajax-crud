@@ -52,5 +52,6 @@
             </div>
         </div>
     </div>
+    @include('components.modal-create')
 </body>
 </html>
