@@ -47,4 +47,13 @@ class ArtikelController extends Controller
         return redirect()->route('artikels.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
+    public function show(string $id): View
+    {
+        //get artikel by ID
+        $artikel = Artikel::findOrFail($id);
+
+        //render view with artikel
+        return view('artikels.show', compact('artikel'));
+    }
+
 }
