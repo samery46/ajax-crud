@@ -108,4 +108,19 @@ class ArtikelController extends Controller
         return redirect()->route('artikels.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
+    public function destroy($id): RedirectResponse
+    {
+        //get artikel by ID
+        $artikel = Artikel::findOrFail($id);
+
+        //delete image
+        Storage::delete('public/artikels/'. $artikel->image);
+
+        //delete artikel
+        $artikel->delete();
+
+        //redirect to index
+        return redirect()->route('artikels.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
 }
