@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class PostController extends Controller
 {
@@ -12,10 +13,20 @@ class PostController extends Controller
     public function index()
     {
         //get all posts from Models
-        $posts = Post::latest()->get();
+        //$posts = Post::latest()->get();
 
         //return view with data
-        return view('posts', compact('posts'));
+        //return view('posts', compact('posts'));
+
+
+            if (request()->ajax()) {
+                $posts = Post::query();
+                return DataTables::of($posts)
+
+                    ->make();
+            }
+            return view('posts');
+
     }
 
     public function store(Request $request)
