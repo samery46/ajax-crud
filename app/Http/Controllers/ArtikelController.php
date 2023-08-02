@@ -9,16 +9,32 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 //import Facade "Storage"
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\Datatables;
 
 class ArtikelController extends Controller
 {
     //
-    public function index(): View
+
+
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Artikel::select('*');
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>
+                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
-        $artikels = Artikel::latest()->paginate(5);
 
-        return view('artikels.index', compact('artikels'));
+        /* $artikels = Artikel::latest()->paginate(5); */
+
+        return view('artikels.index');
     }
 
     public function create(): View
